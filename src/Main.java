@@ -1,55 +1,70 @@
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
 
-        // matriz 2x2 com os elementos 1,2,3,4
+        //Coleta de dados ao usuário (Matriz)
+        System.out.println("Informe o número de LINHAS da matriz que você quer criar:");
+        int linhas = scan.nextInt();
+        System.out.println("Informe o número de COLUNAS da matriz que você quer criar:");
+        int colunas = scan.nextInt();
+        int n = linhas*colunas;
+        int[]elementos1 = new int[n];
+        for (int i = 0; i<n; i++) {
+            System.out.println("Informe o " + (i+1) + "º elemento: ");
+            elementos1[i] = scan.nextInt();
+        }
 
-        int linhas = 2;
-        int colunas = 2;
-        int [] elementos = {1,2,3,4};
+        //Aplicação dos metódos da classe Matrix:
+        Matrix mA = new Matrix(linhas, colunas, elementos1);
+        mA.print();
+        System.out.println("Indique a linha do elemento a ser alterado:");
+        int l = scan.nextInt();
+        l = l - 1;
+        System.out.println("Indique a coluna do elemento a ser alterado:");
+        int c = scan.nextInt();
+        c = c - 1;
+        System.out.println("Indique o novo valor a ser escolhido:");
+        int e = scan.nextInt();
+        mA.set(l, c, e);
+        mA.print();
+        System.out.println("O valor foi alterado para:" + mA.get(l,c));
 
-        //chamamos nossa matriz\
+        // Aplicação dos metodos da classe Linear Algebra (Matriz Times):
+        System.out.println("Escolha um valor para multiplicar a matriz que você criou:");
+        int escalar = scan.nextInt();
+        Matrix timesM = LinearAlgebra.times(escalar, mA);
+        timesM.print();
 
-        Matrix matriz = new Matrix();
+        //Coleta de dados ao usuário Vetor
+        System.out.println("Informe a dimensão do seu vetor: ");
+        int dim = scan.nextInt();
+        int [] elementos2 = new int[dim];
+        for (int i = 0; i<dim; i++) {
+            System.out.println("Informe o " + (i+1) + "º elemento: ");
+            elementos2[i] = scan.nextInt();
+        }
 
-        //utilizamos o metodo construtor paraq construir a matriz
+        //Aplicação dos metódos da classe Vector:
+        Vector vA = new Vector(dim, elementos2);
+        System.out.println("Vetor construído: " );
+        vA.print();
+        System.out.println("Informe a posição do elemento que você quer alterar:");
+        int i = scan.nextInt();
+        i = i-1;
+        System.out.println("Informe o valor que você quer inserir:");
+        int valor = scan.nextInt();
+        vA.set(i, valor);
+        vA.print();
+        System.out.println("O valor foi alterado para:" + vA.get(i));
 
-        matriz.construtor(linhas, colunas, elementos);
-        matriz.print();
-
-        //pula linha
-
-        System.out.println();
-
-        // definimos um novo valor para o elemento 1,1
-
-        matriz.set(1,1,10);
-        matriz.print();
-
-        //pula linha
-
-        System.out.println();
-
-        //localizamos o elemento 1,1
-
-        System.out.println(matriz.get(1,1));
-
-        System.out.println("Classe Vetor");
-
-        //Classe Vector
-
-        Vector vetor = new Vector();
-        int [] elementosVetor = {1,2,3,4,5};
-
-        vetor.construtor(5, elementosVetor);
-        vetor.print();
-        System.out.println("Definindo o elemento 1, para 10");
-
-        vetor.set(1,10);
-        vetor.print();
-        System.out.println("Apresentando o novo elemento 1");
-
-        System.out.println(vetor.get(1));
+        //Aplicação dos metodos da classe Linear Algebra (Vetor Times):
+        System.out.println("Escolha um valor para multiplicar o vetor que você criou:");
+        int escalarV = scan.nextInt();
+        Vector timesV = LinearAlgebra.times(escalarV, vA);
+        timesV.print();
 
     }
 
