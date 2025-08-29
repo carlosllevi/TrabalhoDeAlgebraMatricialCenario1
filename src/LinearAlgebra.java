@@ -25,9 +25,16 @@ public class LinearAlgebra {
     }
 
     //Metodo gauss
-    public static int [][] gauss(int[][] m) {
-        int n = m.length; //linhas
-        int p = m[0]. length; //colunas
+    public static Matrix gauss(Matrix a) {
+        int [][] m = new int[a.linhas][a.colunas];
+        //nova matriz com os mesmos elementos da matriz original, visto que não é possivel usar o construtor da matriz
+        for (int i = 0; i < a.linhas; i++) {
+            for (int j = 0; j<a.colunas; j ++) {
+                m[i][j] = a.get(i, j);
+            }
+        }
+        int n = a.linhas;
+        int p = a.colunas;
         for (int k = 0; k < n; k++) {
             //Descobre pivo
             int pivo = m[k][k];
@@ -46,8 +53,16 @@ public class LinearAlgebra {
                 }
             }
         }
-        return m;
+        int[] elementos = new int [a.linhas*a.colunas];
+        int idx = 0;
+        for (int i = 0; i < a.linhas; i++) {
+            for (int j = 0; j < a.colunas; j++) {
+                elementos[idx] = m[i][j];
+                idx++;
+            }
+        }
+
+        return new Matrix (a.linhas, a.colunas, elementos);
 
     }
-
 }

@@ -38,6 +38,11 @@ public class Main {
         Matrix timesM = LinearAlgebra.times(escalar, mA);
         timesM.print();
 
+        // Aplicação dos metodos da classe Linear Algebra (Matriz Gauss):
+        System.out.println("Realizando a eliminação de Gauss:");
+        Matrix gauss = LinearAlgebra.gauss(mA);
+        mA.print();
+
         //Coleta de dados ao usuário Vetor
         System.out.println("Informe a dimensão do seu vetor: ");
         int dim = scan.nextInt();
