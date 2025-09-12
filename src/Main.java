@@ -11,7 +11,7 @@ public class Main {
         System.out.println("Informe o número de COLUNAS da matriz que você quer criar:");
         int colunas = scan.nextInt();
         int n = linhas*colunas;
-        int[]elementos1 = new int[n];
+        double[]elementos1 = new double[n];
         for (int i = 0; i<n; i++) {
             System.out.println("Informe o " + (i+1) + "º elemento: ");
             elementos1[i] = scan.nextInt();
@@ -41,7 +41,7 @@ public class Main {
         // Aplicação dos metodos da classe Linear Algebra (Matriz Gauss):
         System.out.println("Realizando a eliminação de Gauss:");
         Matrix gauss = LinearAlgebra.gauss(mA);
-        mA.print();
+        gauss.print();
 
         //Coleta de dados ao usuário Vetor
         System.out.println("Informe a dimensão do seu vetor: ");

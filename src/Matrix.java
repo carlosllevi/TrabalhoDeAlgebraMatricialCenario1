@@ -2,13 +2,13 @@ public class Matrix {
 
         int linhas;
         int colunas;
-        int [][] matriz;
+        double [][] matriz;
 
         //Construtor da Matriz
-        public Matrix(int linhas, int colunas, int [] elementos) {
+        public Matrix(int linhas, int colunas, double [] elementos) {
             this.linhas = linhas;
             this.colunas = colunas;
-            matriz = new int[linhas][colunas];
+            matriz = new double[linhas][colunas];
 
             int k = 0;
 
@@ -20,13 +20,14 @@ public class Matrix {
             }
         }
 
-        // Metodo get retornar valor do elemento da matriz
-        public int get (int i, int j) {
+
+    // Metodo get retornar valor do elemento da matriz
+        public double get (int i, int j) {
             return matriz[i][j];
         }
 
         //Metodo set define um novo valor para o elemento [i][j] da matriz
-        public void set (int i, int j, int valor) {
+        public void set (int i, int j, double valor) {
             matriz [i][j] = valor;
         }
 

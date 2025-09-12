@@ -1,8 +1,9 @@
 public class LinearAlgebra {
 
     //Metodo times matriz
-    public static Matrix times(int escalar, Matrix a) {
-        int [] elementos = new int [a.linhas*a.colunas];
+    public static Matrix times(int escalar, Matrix a) { // ajeitar para a possibilidade de entrada de uma matriz
+        int i1 = a.linhas * a.colunas;
+        double [] elementos = new double[i1];
         int k = 0;
         for (int i = 0; i< a.linhas; i++) {
             for (int j = 0; j < a.colunas; j++) {
@@ -18,51 +19,59 @@ public class LinearAlgebra {
         int [] elementos = new int [a.dim];
         int k = 0;
         for (int i = 0; i< a.dim; i++) {
-                elementos [k] = escalar * a.get(i);
-                k++;
+            elementos [k] = escalar * a.get(i);
+            k++;
         }
         return new Vector(a.dim, elementos);
     }
 
-    //Metodo gauss
-    public static Matrix gauss(Matrix a) {
-        int [][] m = new int[a.linhas][a.colunas];
-        //nova matriz com os mesmos elementos da matriz original, visto que não é possivel usar o construtor da matriz
-        for (int i = 0; i < a.linhas; i++) {
-            for (int j = 0; j<a.colunas; j ++) {
-                m[i][j] = a.get(i, j);
+    public static Matrix gauss (Matrix a) {
+        //Matriz Cópia
+        double [] elementosOriginais = new double [a.linhas*a.colunas];
+        int k = 0;
+        for(int i = 0; i < a.linhas; i++) {
+            for(int j = 0; j < a.colunas; j++) {
+                elementosOriginais[k++] = a.get(i, j);
             }
         }
-        int n = a.linhas;
-        int p = a.colunas;
-        for (int k = 0; k < n; k++) {
-            //Descobre pivo
-            int pivo = m[k][k];
-            if (pivo == 0) {
-                continue;
-            }
-            //Pivo vira 1
-            for (int j = k; j < p; j ++) {
-                m[k][j] = m [k][j]/pivo;
-            }
-            //Zera os elementos abaixo do pivo
-            for (int i = k + 1; i < n; i++) {
-                int fator = m[i][k];
-                for (int j = k; j < p; j++) {
-                    m[i][j] = m[i][j] - fator * m[k][j];
+        Matrix m = new Matrix(a.linhas, a.colunas, elementosOriginais);
+
+        //Passar por cada coluna para zerar os elementos abaixo da diagonal
+        int pivoLinha = 0;
+
+        for (int j = 0; j < m.colunas && pivoLinha < m.linhas; j++) {
+            // Encontrar a linha com maior valor em módulo
+            int maxLinha = pivoLinha;
+            for (int i = pivoLinha + 1; i < m.linhas; i ++) {
+                if (Math.abs(m.get(i,j)) > Math.abs (m.get(maxLinha,j))) {
+                    maxLinha = i;
                 }
             }
-        }
-        int[] elementos = new int [a.linhas*a.colunas];
-        int idx = 0;
-        for (int i = 0; i < a.linhas; i++) {
-            for (int j = 0; j < a.colunas; j++) {
-                elementos[idx] = m[i][j];
-                idx++;
+            //Trocar a linha do pivô com a linha de maior valor
+            for (int n = j; n < m.colunas; n ++) {
+                double aux = m.get(pivoLinha,n);
+                m.set(pivoLinha, n, m.get(maxLinha,n));
+                m.set(maxLinha, n, aux);
             }
+
+            // Se o pivo for zero pula para a prx linha
+            if (Math.abs(m.get(pivoLinha, j)) <= 1e-10) {
+                continue;
+            }
+
+            //Zerar todos os elementos abaixo da coluna abaixo do pivo
+            for (int i = pivoLinha + 1; i < m.linhas; i++) {
+                //Saber o fator q vai multiplicar a linha
+                double fator = m.get(i, j) / m.get(pivoLinha, j);
+
+                //Subtrair a linha pela linha multiplicada pelo fator
+                for (int col = j; col < m.colunas; col++) {
+                    double novoValor = m.get(i, col) - fator * m.get(pivoLinha, col);
+                    m.set(i, col, novoValor);
+                }
+            }
+            pivoLinha++;
         }
-
-        return new Matrix (a.linhas, a.colunas, elementos);
-
+        return m;
     }
 }
