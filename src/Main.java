@@ -95,6 +95,11 @@ public class Main {
 
         // 6. Solve Thais
 
+        Vector solve = LinearAlgebra.solve(mA);
+        System.out.println("Matriz após o solve:");
+        solve.print();
+        System.out.println(" ");
+
         //Coleta de dados ao usuário Vetor
         System.out.println("Informe a dimensão do seu vetor: ");
         int dim = scan.nextInt();
