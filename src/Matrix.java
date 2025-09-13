@@ -20,6 +20,15 @@ public class Matrix {
             }
         }
 
+    // Construtor para criar uma matriz "vazia" (preenchida com zeros)
+    public Matrix(int linhas, int colunas) {
+        this.linhas = linhas;
+        this.colunas = colunas;
+        // Apenas cria o array 2D com as dimensões corretas.
+        // O Java automaticamente inicializa todos os elementos de um array de int com 0.
+        this.matriz = new double[linhas][colunas];
+    }
+
 
     // Metodo get retornar valor do elemento da matriz
         public double get (int i, int j) {

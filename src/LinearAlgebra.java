@@ -1,5 +1,72 @@
 public class LinearAlgebra {
 
+    //1.  Metodo para transpor uma matriz
+    public static Matrix transpose(Matrix a) {
+        int linhas = a.linhas;
+        int colunas = a.colunas;
+        double[] novaArrayElementos = new double[linhas * colunas];
+
+        for (int i = 0; i < linhas; i++) {
+            for (int j = 0; j < colunas; j++) {
+                int novoIndice = j * linhas + i;
+                double elementoOriginal = a.get(i, j);
+
+                novaArrayElementos[novoIndice] = elementoOriginal;
+            }
+        }
+        return new Matrix(colunas, linhas, novaArrayElementos);
+    }
+    public static Vector transpose(Vector a) {
+        int dim = a.dim;
+        int[] novaArrayElementos = new int[dim];
+        for (int i = 0; i < dim; i++) {
+            novaArrayElementos[i] = a.get(i);
+        }
+        return new Vector(dim, novaArrayElementos);
+    }
+
+    //2. Metodo sum
+    public static Matrix sum(Matrix a, Matrix b){
+        double [] elementos = new double [a.linhas*a.colunas];
+        int k = 0;
+        for (int i = 0; i < a.linhas; i++){
+            for (int j = 0; j < a.colunas; j++){
+                elementos[k] = a.get(i,j) + b.get(i,j);
+                k++;
+            }
+        }
+        return new Matrix(a.linhas, a.colunas, elementos);
+    }
+
+    public static Vector sum(Vector a, Vector b){
+        int [] elementos = new int[a.dim];
+        int k = 0;
+        for (int i = 0; i < a.dim; i++){
+            elementos [k] = a.get(i) + b.get(i);
+            k++;
+        }
+        return new Vector(a.dim, elementos);
+    }
+
+    // Metodo dot matriz
+    public static Matrix dot(Matrix a,Matrix b) {
+        Matrix c = new Matrix(a.linhas, b.colunas);
+
+        for (int i = 0; i < c.linhas; i++) {
+            for (int j = 0; j < c.colunas; j++) {
+
+                int soma = 0;
+
+                for (int k = 0; k < a.colunas; k++) {
+                    soma += a.matriz[i][k] + b.matriz[k][j];
+                }
+
+                c.matriz[i][j] = soma;
+            }
+        }
+        return c;
+    }
+
     //Metodo times matriz
     public static Matrix times(int escalar, Matrix a) { // ajeitar para a possibilidade de entrada de uma matriz
         int i1 = a.linhas * a.colunas;
