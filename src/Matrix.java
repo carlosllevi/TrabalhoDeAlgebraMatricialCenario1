@@ -4,7 +4,7 @@ public class Matrix {
         int colunas;
         double [][] matriz;
 
-        //Construtor da Matriz
+        //Constructor Matrix
         public Matrix(int linhas, int colunas, double [] elementos) {
             this.linhas = linhas;
             this.colunas = colunas;
@@ -20,31 +20,33 @@ public class Matrix {
             }
         }
 
-    // Construtor para criar uma matriz "vazia" (preenchida com zeros)
-    public Matrix(int linhas, int colunas) {
-        this.linhas = linhas;
-        this.colunas = colunas;
-        // Apenas cria o array 2D com as dimensões corretas.
-        // O Java automaticamente inicializa todos os elementos de um array de int com 0.
-        this.matriz = new double[linhas][colunas];
-    }
+        //Construtor para criar uma matriz "vazia" (preenchida com zeros)
+        public Matrix(int linhas, int colunas) {
+            this.linhas = linhas;
+            this.colunas = colunas;
+            this.matriz = new double[linhas][colunas];
+        }
 
 
-    // Metodo get retornar valor do elemento da matriz
+        //Getter
         public double get (int i, int j) {
             return matriz[i][j];
         }
 
-        //Metodo set define um novo valor para o elemento [i][j] da matriz
+        //Setter
         public void set (int i, int j, double valor) {
-            matriz [i][j] = valor;
+            if (Math.abs(valor) < 1e-10) {
+                matriz[i][j] = 0.0;
+            } else {
+                matriz[i][j] = valor;
+            }
         }
 
-        //Print Matriz
+        //Print Matrix
         public void print () {
             for (int i = 0; i<linhas; i++) {
                 for (int j = 0; j<colunas; j++) {
-                    System.out.print(matriz[i][j] + " ");
+                    System.out.printf("%.2f ", matriz[i][j]);
                 }
                 System.out.println();
             }

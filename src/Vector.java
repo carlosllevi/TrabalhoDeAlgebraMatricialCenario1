@@ -3,7 +3,7 @@ public class Vector {
     int dim;
     int [] vetor;
 
-    //Construtor Vetor
+    //Constructor Vector
     public Vector(int dim, int [] elementos) {
         this.dim = dim;
         vetor = new int[dim];
@@ -12,17 +12,17 @@ public class Vector {
         }
     }
 
-    //Metodo Get
+    //Getter
     public int get (int i) {
         return vetor[i];
     }
 
-    //Metodo Set
+    //Setter
     public void set (int i, int valor) {
         vetor [i] = valor;
     }
 
-    //Metodo Print do Vetor
+    //Print Vector
     public void print () {
         for (int i = 0; i < dim; i++) {
             System.out.print(vetor[i] + " ");

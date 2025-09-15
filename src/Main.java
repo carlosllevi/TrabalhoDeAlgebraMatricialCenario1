@@ -67,7 +67,7 @@ public class Main {
         timesM.print();
         System.out.println(" ");
 
-        // 4. Dot Rafael
+        // 4. Aplicação dos metodos da classe Linear Algebra (Matriz Dot): Rafael
         System.out.println("Utilizando método dot:");
         System.out.println("Informe o número de LINHAS da matriz C que você quer criar:");
         int linhasC = scan.nextInt();
@@ -93,14 +93,14 @@ public class Main {
         gauss.print();
         System.out.println(" ");
 
-        // 6. Solve Thais
+        // 6. Aplicação dos metodos da classe Linear Algebra (Matriz Solve): Thais
 
-        Vector solve = LinearAlgebra.solve(mA);
+        Matrix solve = LinearAlgebra.solve(mA);
         System.out.println("Matriz após o solve:");
         solve.print();
         System.out.println(" ");
 
-        //Coleta de dados ao usuário Vetor
+        //Coleta de dados ao usuário da classe Vector:
         System.out.println("Informe a dimensão do seu vetor: ");
         int dim = scan.nextInt();
         int [] elementos1V = new int[dim];
@@ -124,15 +124,12 @@ public class Main {
         System.out.println(" ");
         System.out.println("O valor foi alterado para:" + vA.get(i));
 
-        //Aplicação dos metodos da classe Linear Algebra (Vetor tranposto):
+        //Aplicação dos metodos da classe Linear Algebra (Vetor tranposto): Giovana
         System.out.println("O vetor transposto é:");
-        Vector transposto = LinearAlgebra.transpose(vA);
-        for (int m=0; m<vA.dim; m++) {
-            System.out.println(transposto.get(m));
-        }
-        System.out.println(" ");
+        Matrix vetorTransposto = LinearAlgebra.transposeV(vA);
+        vetorTransposto.print();
 
-        //Aplicação dos metodos da classe Linear Algebra (Vetor Sum):
+        //Aplicação dos metodos da classe Linear Algebra (Vetor Sum): Sophia
         System.out.println("Aplicação do metódo Sum para Vetor");
         System.out.println("Para isso precismaos construir um novo vetor:");
         int [] elementos2V = new int[dim];
@@ -147,7 +144,7 @@ public class Main {
         sumV.print();
         System.out.println(" ");
 
-        //Aplicação dos metodos da classe Linear Algebra (Vetor Times):
+        //Aplicação dos metodos da classe Linear Algebra (Vetor Times): Levi
         System.out.println("Escolha um valor para multiplicar o vetor que você criou:");
         int escalarV = scan.nextInt();
         Vector timesV = LinearAlgebra.times(escalarV, vA);
