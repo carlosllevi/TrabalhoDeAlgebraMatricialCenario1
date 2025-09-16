@@ -60,11 +60,13 @@ public class LinearAlgebra {
                 int soma = 0;
 
                 for (int k = 0; k < a.colunas; k++) {
-                    soma += a.matriz[i][k] + b.matriz[k][j];
+                    soma += a.matriz[i][k] * b.matriz[k][j];
+                    c.matriz[i][j] = soma;
                 }
 
-                c.matriz[i][j] = soma;
+
             }
+
         }
         return c;
     }
@@ -141,7 +143,7 @@ public class LinearAlgebra {
     }
 
     // Solve Matrix
-    public static Matrix solve(Matrix a) {
+    public static Matrix solve(Matrix a) { // restrições se a nualidade e o posto for diferente dezero, retornar a ultima coluna com a mensagem se é possivel, não é possivel, impossivel, possivel indeterminado
         Matrix m = gauss(a);
 
         int linhas = m.linhas;
@@ -167,7 +169,16 @@ public class LinearAlgebra {
                     m.set(k, j, novoValor);
                 }
             }
+
+
         }
-        return m;
+        double [] vetorSolucao = new double[m.linhas];
+        int numLinhas = m.linhas;
+        int indiceUltimaColuna = m.colunas - 1;
+        int k = 0;
+        for (int i = 0; i<numLinhas; i++) {
+            vetorSolucao[i] = m.get(i, indiceUltimaColuna);
+        }
+        return new Matrix(m.linhas,1, vetorSolucao);
     }
 }
